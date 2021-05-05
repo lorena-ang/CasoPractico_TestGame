@@ -46,12 +46,13 @@ public class PlayerController : MonoBehaviour
 
         if (other.tag == "Power")
         {
-            StartCoroutine(RegresarOrig(6));
             transform.localScale = new Vector3(4,1,1);
+            // Aunque no pidieron destruirlo decidí hacerlo para que se viera mejor el juego
             Destroy(other.gameObject);
+            StartCoroutine(RegresarOrig(6));
         }
     }
-
+    
     IEnumerator RegresarOrig(float wait)
     {
         yield return new WaitForSeconds(wait);
