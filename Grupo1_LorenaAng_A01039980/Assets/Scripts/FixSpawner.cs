@@ -19,11 +19,11 @@ public class FixSpawner : MonoBehaviour
         
     }
 
-     IEnumerator InstanciarObj()
+    IEnumerator InstanciarObj()
     {   
         while (true)
         {
-            float rand_v = Random.Range(1, 12);
+            float rand_v = Random.Range(1, 10);
             yield return new WaitForSeconds(1);
 
             if (rand_v == 1)

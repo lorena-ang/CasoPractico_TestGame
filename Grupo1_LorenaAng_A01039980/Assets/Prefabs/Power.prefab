@@ -127,6 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  Lives: {fileID: 0}
+  Rock: {fileID: 8973407681404088860}
 --- !u!135 &8973407681404088853
 SphereCollider:
   m_ObjectHideFlags: 0

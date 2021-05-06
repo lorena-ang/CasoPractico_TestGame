@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Rock
   - Power
+  - Meteorite
   layers:
   - Default
   - TransparentFX

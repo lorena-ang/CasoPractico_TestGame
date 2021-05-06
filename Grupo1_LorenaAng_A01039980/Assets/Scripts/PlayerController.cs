@@ -11,7 +11,15 @@ public class PlayerController : MonoBehaviour
     public float speed = 10.0f;
     public Text Rocks;
     public int score;
-    
+    bool speedDecreased = false;
+    public GameOver GameOverOb;
+    public Text Lives;
+
+    public void GameOverFunc()
+    {
+        GameOverOb.Setup();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +30,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         horizontal = Input.GetAxis("Horizontal");
+
+        if (int.Parse(Lives.text) <= 0)
+        {
+            GameOverFunc();
+        }
     }
 
     private void FixedUpdate()
@@ -50,6 +63,19 @@ public class PlayerController : MonoBehaviour
             // Aunque no pidieron destruirlo decidí hacerlo para que se viera mejor el juego
             Destroy(other.gameObject);
             StartCoroutine(RegresarOrig(6));
+            
+        }
+
+        if (other.tag == "Meteorite")
+        {
+            // De esta manera se va reduciendo a la mitad la velocidad, pero se va regresando la velocidad de tal manera que siga siendo jugable
+            if (!speedDecreased)
+            {
+                speed /= 2;
+                speedDecreased = true;
+                StartCoroutine(RegresarSpeed(5));
+            }
+            Destroy(other.gameObject);
         }
     }
     
@@ -57,5 +83,12 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(wait);
         transform.localScale = new Vector3(2,1,1);
+    }
+
+    IEnumerator RegresarSpeed(float wait)
+    {
+        speedDecreased = false;
+        yield return new WaitForSeconds(wait);
+        speed *= 2;
     }
 }
